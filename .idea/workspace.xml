@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/chess.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/libraries/google_code_gson.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/libraries/junit_jupiter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/10k-architecture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/client/client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/client/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/server/lib/passoff-dependencies.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/server/server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/server/src/main/java/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/shared.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/ChessGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/ChessMove.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/ChessPiece.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/ChessPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/main/java/chess/InvalidMoveException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/TestFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/ChessBoardTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/ChessMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/ChessPositionTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/BishopMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/KingMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/KnightMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/PawnMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/QueenMoveTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chess/shared/src/test/java/passoffTests/chessTests/chessPieceTests/RookMoveTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2ajpkn8Re3877lpUiyADrKFSykK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jackj/classes/cs240/chess&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="" />
+      <created>1704841991611</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704841991611</updated>
+    </task>
+    <servers />
+  </component>
+</project>
