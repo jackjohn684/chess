@@ -105,8 +105,7 @@ public class TestFactory {
     public static Set<ChessMove> loadMoves(ChessPosition startPosition, int[][] endPositions) {
         var validMoves = new HashSet<ChessMove>();
         for (var endPosition : endPositions) {
-            validMoves.add(TestFactory.getNewMove(startPosition,
-                    TestFactory.getNewPosition(endPosition[0], endPosition[1]), null));
+            validMoves.add(TestFactory.getNewMove(startPosition, TestFactory.getNewPosition(endPosition[0], endPosition[1]), null));
         }
         return validMoves;
     }

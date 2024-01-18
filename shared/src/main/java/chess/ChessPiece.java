@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 
 /**
@@ -11,8 +10,9 @@ import java.util.HashSet;
  * signature of the existing methods.
  */
 public class ChessPiece {
-
+    private PieceType myType;
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
+         myType = type;
     }
 
     /**
@@ -48,7 +48,24 @@ public class ChessPiece {
      *
      * @return Collection of valid moves
      */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        return new HashSet<>();
+    public HashSet<ArrayList<Integer>> pieceMoves(ChessBoard board, ChessPosition myPosition) {
+        HashSet<ArrayList<Integer>> potentialMoves = new HashSet<ArrayList<Integer>>();
+        if (this.myType == PieceType.BISHOP)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (i-myPosition.getRow() == j-myPosition.getColumn() || i-myPosition.getRow()  == myPosition.getColumn()-j)
+                    {
+                        ArrayList<Integer> myList = new ArrayList<Integer>();
+                        myList.add(i + 1);
+                        myList.add(j + 1);
+                        potentialMoves.add(myList);
+                    }
+                }
+            }
+        }
+        return potentialMoves;
     }
 }
