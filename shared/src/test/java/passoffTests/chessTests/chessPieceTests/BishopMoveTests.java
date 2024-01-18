@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static passoffTests.TestFactory.*;
 
-public class BishopMoveTests {
+public class  BishopMoveTests {
 
     @Test
     public void bishopMoveUntilEdge() {
