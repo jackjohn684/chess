@@ -48,20 +48,21 @@ public class ChessPiece {
      *
      * @return Collection of valid moves
      */
-    public HashSet<ArrayList<Integer>> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        HashSet<ArrayList<Integer>> potentialMoves = new HashSet<ArrayList<Integer>>();
+    public HashSet<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
+        HashSet<ChessMove> potentialMoves = new HashSet<ChessMove>();
         if (this.myType == PieceType.BISHOP)
         {
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if (i-myPosition.getRow() == j-myPosition.getColumn() || i-myPosition.getRow()  == myPosition.getColumn()-j)
+                    if (i-myPosition.getRow() == j-myPosition.getColumn() || i-(myPosition.getRow()-1)  == (myPosition.getColumn()-1) -j )
                     {
-                        ArrayList<Integer> myList = new ArrayList<Integer>();
-                        myList.add(i + 1);
-                        myList.add(j + 1);
-                        potentialMoves.add(myList);
+                        if (i != (myPosition.getRow()-1) && j != (myPosition.getColumn()-1))
+                        {
+                            ChessMove newMove = new ChessMove(myPosition, new ChessPosition(i+1, j+1), null);
+                            potentialMoves.add(newMove);
+                        }
                     }
                 }
             }
