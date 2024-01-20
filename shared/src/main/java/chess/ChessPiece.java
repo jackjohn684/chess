@@ -74,8 +74,8 @@ public class ChessPiece {
             int j = myPosition.getColumn();
             while (i < 8 && j < 8) {
                 if (i - myPosition.getRow() == j - myPosition.getColumn()) {
-                    if (board.pieces.containsKey(new ChessPosition(i + 1, j + 1))) {
-                        if (this.myColor != board.pieces.get(new ChessPosition(i + 1, j + 1)).myColor) {
+                    if (board.pieces.containsKey(new ChessPosition(i, j))) {
+                        if (this.myColor != board.pieces.get(new ChessPosition(i, j)).myColor) {
                             potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i + 1, j + 1), null));
                             break;
                         } else {
@@ -93,8 +93,8 @@ public class ChessPiece {
             j = myPosition.getColumn();
             while (i >= 0 && j < 8) {
                 if (i - (myPosition.getRow() - 1) == (myPosition.getColumn() - 1) - j) {
-                    if (board.pieces.containsKey(new ChessPosition(i + 1, j + 1))) {
-                        if (this.myColor != board.pieces.get(new ChessPosition(i + 1, j + 1)).myColor) {
+                    if (board.pieces.containsKey(new ChessPosition(i, j))) {
+                        if (this.myColor != board.pieces.get(new ChessPosition(i, j)).myColor) {
                             potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i + 1, j + 1), null));
                             break;
                         } else {
@@ -112,8 +112,8 @@ public class ChessPiece {
             j = myPosition.getColumn() - 2;
             while (i >= 0 && j >= 0) {
                 if (i - myPosition.getRow() == j - myPosition.getColumn()) {
-                    if (board.pieces.containsKey(new ChessPosition(i + 1, j + 1))) {
-                        if (this.myColor != board.pieces.get(new ChessPosition(i + 1, j + 1)).myColor) {
+                    if (board.pieces.containsKey(new ChessPosition(i, j))) {
+                        if (this.myColor != board.pieces.get(new ChessPosition(i, j)).myColor) {
                             potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i + 1, j + 1), null));
                             break;
                         } else {
@@ -131,8 +131,8 @@ public class ChessPiece {
             j = myPosition.getColumn() - 2;
             while (i < 8 && j >= 0) {
                 if (i - (myPosition.getRow() - 1) == (myPosition.getColumn() - 1) - j) {
-                    if (board.pieces.containsKey(new ChessPosition(i + 1, j + 1))) {
-                        if (this.myColor != board.pieces.get(new ChessPosition(i + 1, j + 1)).myColor) {
+                    if (board.pieces.containsKey(new ChessPosition(i, j))) {
+                        if (this.myColor != board.pieces.get(new ChessPosition(i, j)).myColor) {
                             potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i + 1, j + 1), null));
                             break;
                         } else {
@@ -146,6 +146,153 @@ public class ChessPiece {
                     break;
                 }
             }
+        }
+
+
+
+        if(this.myType == PieceType.KING) {
+            boolean noMove = false;
+            int i = myPosition.getRow()+1;
+            int j = myPosition.getColumn()+1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+
+
+            noMove = false;
+            i = myPosition.getRow();
+            j = myPosition.getColumn()+1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+
+            noMove = false;
+            i = myPosition.getRow()-1;
+            j = myPosition.getColumn()+1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+
+            noMove = false;
+            i = myPosition.getRow()-1;
+            j = myPosition.getColumn();
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+
+            noMove = false;
+            i = myPosition.getRow()-1;
+            j = myPosition.getColumn()-1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+            noMove = false;
+            i = myPosition.getRow();
+            j = myPosition.getColumn()-1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+            noMove = false;
+            i = myPosition.getRow()+1;
+            j = myPosition.getColumn()-1;
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+            noMove = false;
+            i = myPosition.getRow()+1;
+            j = myPosition.getColumn();
+            if  (i > 8 || j > 8 || i <= 0 || j <= 0) {
+                noMove = true;
+            }
+            if (board.pieces.containsKey(new ChessPosition(i-1, j-1)))
+            {
+                noMove = true;
+                if (this.myColor != board.pieces.get(new ChessPosition(i-1, j-1)).myColor) {
+                    potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                }
+            }
+            if (noMove == false)
+            {
+                potentialMoves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            }
+
         }
         return potentialMoves;
     }

@@ -20,8 +20,8 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        this.squares[position.getRow()][position.getColumn()] = piece;
-        pieces.put(position, piece);
+        this.squares[(position.getRow()-1)][(position.getColumn()-1)] = piece;
+        pieces.put(new ChessPosition((position.getRow() -1),(position.getColumn()-1)), piece);
     }
     /**
      * Gets a chess piece on the chessboard
@@ -31,7 +31,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow()-1][position.getColumn()-1];
     }
 
     /**
