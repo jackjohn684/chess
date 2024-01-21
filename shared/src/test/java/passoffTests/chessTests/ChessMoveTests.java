@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import static passoffTests.TestFactory.getNewMove;
@@ -77,4 +78,16 @@ public class ChessMoveTests {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessMoveTests)) return false;
+        ChessMoveTests that = (ChessMoveTests) o;
+        return Objects.equals(original, that.original) && Objects.equals(equal, that.equal) && Objects.equals(startDifferent, that.startDifferent) && Objects.equals(endDifferent, that.endDifferent) && Objects.equals(promoteDifferent, that.promoteDifferent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(original, equal, startDifferent, endDifferent, promoteDifferent);
+    }
 }

@@ -31,6 +31,19 @@ public class ChessPiece {
         PAWN
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessPiece)) return false;
+        ChessPiece that = (ChessPiece) o;
+        return myType == that.myType && myColor == that.myColor;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(myType, myColor);
+    }
+
     /**
      * @return Which team this chess piece belongs to
      */
@@ -45,18 +58,12 @@ public class ChessPiece {
         return myType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChessPiece that = (ChessPiece) o;
-        return myType == that.myType;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(myType);
-    }
+    @Override public String toString() {
+    return "ChessPiece{" +
+            "myType=" + myType +
+            ", myColor=" + myColor +
+            '}';
+}
 
     /**
      * Calculates all the positions a chess piece can move to
