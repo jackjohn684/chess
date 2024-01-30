@@ -7,7 +7,7 @@ import java.util.*;
  * signature of the existing methods.
  */
 public class ChessBoard {
-    private ChessPiece[][] squares = new ChessPiece [8][8];
+    ChessPiece[][] squares = new ChessPiece [8][8];
     public HashMap<ChessPosition, ChessPiece> pieces = new HashMap<ChessPosition, ChessPiece>();
 
     public ChessBoard() {
