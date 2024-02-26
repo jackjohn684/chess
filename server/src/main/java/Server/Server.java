@@ -8,7 +8,6 @@ public class Server {
         Spark.port(desiredPort);
 
         Spark.staticFiles.location("web");
-
         // Register your endpoints and handle exceptions here.
 
         Spark.awaitInitialization();
@@ -19,4 +18,6 @@ public class Server {
         Spark.stop();
         Spark.awaitStop();
     }
+
+
 }
