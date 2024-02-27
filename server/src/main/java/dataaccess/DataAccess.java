@@ -1,4 +1,5 @@
 package dataaccess;
+import model.AuthToken;
 import model.User;
 
 import java.util.Collection;
@@ -9,6 +10,6 @@ public interface DataAccess {
     public User getUser(String userName);
     public void deleteUser(String userName);
     public void clearUsers();
-
+    public AuthToken addAuthToken(String username);
     public void clear();
 }

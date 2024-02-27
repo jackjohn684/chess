@@ -16,11 +16,14 @@ public class ServerFacade {
     private final String serverUrl;
     public ServerFacade(String url) { serverUrl = url;}
 
-    public User addUser(User user) throws ResponseException {
+    public User register(User user) throws ResponseException {
         var path = "/user";
         return this.makeRequest("POST", path, user, User.class);
     }
-
+    public User login(User user) throws ResponseException {
+        var path = "/session";
+        return this.makeRequest("POST", path, user, User.class);
+    }
     public User[] listUsers() throws ResponseException {
         var path = "/user";
         record listUserResponse(User[] user) {

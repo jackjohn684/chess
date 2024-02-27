@@ -3,6 +3,8 @@ package server;
 import com.google.gson.Gson;
 import dataaccess.MemoryDataAccess;
 import exception.ResponseException;
+import model.ErrorMessage;
+import model.LoginCredentials;
 import model.User;
 import service.*;
 import spark.Request;
@@ -23,17 +25,45 @@ public class Server {
 
         Spark.staticFiles.location("web");
         Spark.get("/user", this::listUsers);
-        Spark.post("/user", this::addUser);
-        Spark.delete("/user/:userName", this::deleteUser);
+        Spark.post("/user", this::register);
+        Spark.delete("/user/:username", this::deleteUser);
         Spark.delete("/user", this::clearUsers);
         Spark.delete("/db", this::clear);
+        Spark.post("/session", this::login);
         Spark.awaitInitialization();
         return Spark.port();
     }
-    private Object addUser(Request req, Response res) throws ResponseException{
+    private Object register(Request req, Response res) throws ResponseException{
         var user = new Gson().fromJson(req.body(), User.class);
-        user = userService.addUser(user);
-        return new Gson().toJson(user);
+        var existing = userService.getUser(user.username());
+        if (existing == null) {
+            userService.addUser(user);
+            var auth = userService.addAuthToken(user.username());
+            return new Gson().toJson(auth);
+        }
+        else {
+            res.status(403);
+            return new Gson().toJson(new ErrorMessage("Error: already taken"));
+        }
+    }
+    private Object login(Request req, Response res) throws ResponseException {
+        LoginCredentials user = new Gson().fromJson(req.body(), LoginCredentials.class);
+        var test = userService.getUser(user.username());
+        if(test != null) {
+            if (test.password().equals(user.password())) {
+                var auth = userService.addAuthToken(user.username());
+                res.status(200);
+                return new Gson().toJson(auth);
+            }
+            else{
+                res.status(401);
+                return new Gson().toJson(new ErrorMessage("Error: unauthorized"));
+            }
+        }
+        else {
+            res.status(401);
+            return new Gson().toJson(new ErrorMessage("Error: unauthorized"));
+        }
     }
     private Object listUsers(Request req, Response res) throws ResponseException {
         res.type("application/json");
@@ -53,7 +83,7 @@ public class Server {
     }
 
     private Object deleteUser(Request req, Response res) throws ResponseException {
-        var userName = req.params(":userName");
+        var userName = req.params(":username");
         var user = userService.getUser(userName);
         if (user != null) {
             userService.deleteUser(userName);
