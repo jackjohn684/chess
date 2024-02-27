@@ -9,4 +9,6 @@ public interface DataAccess {
     public User getUser(String userName);
     public void deleteUser(String userName);
     public void clearUsers();
+
+    public void clear();
 }
