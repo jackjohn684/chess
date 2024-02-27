@@ -87,6 +87,17 @@ public class ServerTest {
         assertUserCollectionEqual(expected, List.of(result));
     }
 
+    @Test
+    void clearUsers() throws Exception {
+        var expected = new ArrayList<User>();
+        serverFacade.addUser(new User("0", "sally", "PetType.CAT"));
+
+        serverFacade.addUser(new User("1", "joe", "PetType.dog"));
+        serverFacade.clearUsers();
+
+        var result = assertDoesNotThrow(() -> serverFacade.listUsers());
+        assertUserCollectionEqual(expected, List.of(result));
+    }
     public static void assertUserCollectionEqual(Collection<User> expected, Collection<User> actual) {
         User[] actualList = actual.toArray(new User[]{});
         User[] expectedList = expected.toArray(new User[]{});

@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/test/java/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/ServerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,6 +96,7 @@
     "JUnit.QueenMoveTests.queenMoveUntilEdge.executor": "Debug",
     "JUnit.RookMoveTests.executor": "Debug",
     "JUnit.ServerTest.addUser.executor": "Run",
+    "JUnit.ServerTest.clearUsers.executor": "Debug",
     "JUnit.ServerTest.deleteUser.executor": "Debug",
     "JUnit.ServerTest.getUser.executor": "Debug",
     "JUnit.ServerTest.listUsers.executor": "Debug",
@@ -126,12 +126,12 @@
       <recent name="C:\Users\jackj\classes\cs240\chess\shared\src\test\java\passoffTests\chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServerTest.deleteUser">
-    <configuration name="ServerTest.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StandardAPITests.staticFiles">
+    <configuration name="ServerTest.clearUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ServerTest" />
-      <option name="METHOD_NAME" value="addUser" />
+      <option name="METHOD_NAME" value="clearUsers" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -167,7 +167,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.staticFiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -177,18 +177,19 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="staticFiles" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StandardAPITests.staticFiles" />
+        <item itemvalue="JUnit.ServerTest.clearUsers" />
         <item itemvalue="JUnit.ServerTest.deleteUser" />
         <item itemvalue="JUnit.ServerTest.listUsers" />
         <item itemvalue="JUnit.ServerTest.getUser" />
-        <item itemvalue="JUnit.ServerTest.addUser" />
-        <item itemvalue="JUnit.StandardAPITests" />
       </list>
     </recent_temporary>
   </component>

@@ -8,4 +8,5 @@ public interface DataAccess {
     public Collection<User> listUsers();
     public User getUser(String userName);
     public void deleteUser(String userName);
+    public void clearUsers();
 }

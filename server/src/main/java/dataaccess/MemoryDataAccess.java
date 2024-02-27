@@ -19,4 +19,6 @@ public class MemoryDataAccess implements DataAccess {
     public void deleteUser(String userName) {users.remove(userName);}
 
     public User getUser(String userName) {return users.get(userName);}
+
+    public void clearUsers() {users.clear();}
 }

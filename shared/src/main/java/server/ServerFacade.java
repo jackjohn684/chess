@@ -32,6 +32,10 @@ public class ServerFacade {
         var path = String.format("/user/%s", userName);
         this.makeRequest("DELETE", path, null, null);
     }
+    public void clearUsers() throws ResponseException {
+        var path = "/user";
+        this.makeRequest("DELETE", path, null, null);
+    }
     private <T> T makeRequest(String method, String path, Object request, Class<T> responseClass) throws ResponseException{
         try {
             URL url = (new URI(serverUrl + path)).toURL();

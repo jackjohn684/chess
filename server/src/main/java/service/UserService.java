@@ -23,4 +23,7 @@ public class UserService {
     public void deleteUser(String userName) throws ResponseException {
         dataAccess.deleteUser(userName);
     }
+    public void clearUsers() throws ResponseException {
+        dataAccess.clearUsers();
+    }
 }

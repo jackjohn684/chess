@@ -23,6 +23,7 @@ public class Server {
         Spark.get("/user", this::listUsers);
         Spark.post("/user", this::addUser);
         Spark.delete("/user/:userName", this::deleteUser);
+        Spark.delete("/user", this::clearUsers);
         Spark.awaitInitialization();
         return Spark.port();
     }
@@ -35,6 +36,12 @@ public class Server {
         res.type("application/json");
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));
+    }
+
+    private Object clearUsers(Request req, Response res) throws ResponseException {
+        userService.clearUsers();
+        res.status(204);
+        return "";
     }
 
     private Object deleteUser(Request req, Response res) throws ResponseException {
