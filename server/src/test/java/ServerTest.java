@@ -1,3 +1,4 @@
+import exception.ResponseException;
 import model.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -5,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import passoffTests.testClasses.TestModels;
 import server.Server;
 import server.ServerFacade;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +25,7 @@ public class ServerTest {
 
     private static ServerFacade serverFacade;
     private String existingAuth;
+
     @BeforeAll
     public static void init() {
         server = new Server();
@@ -42,25 +48,52 @@ public class ServerTest {
         createRequest.gameName = "testGame";
  */
     }
+
     @AfterAll
     static void stopServer() {
         Server.stop();
     }
 
     @Test
-    void addUser(){
+    void addUser() {
         var yee = new User("jack684", "QWerTy55", "jackjohn684@gmail.com");
-        var result = assertDoesNotThrow(()-> serverFacade.addUser(yee));
+        var result = assertDoesNotThrow(() -> serverFacade.addUser(yee));
         assertUserEqual(yee, result);
     }
-    void getUser() {
-        var yee = "jack684";
-        var result = assertDoesNotThrow(( -> serverFacade.getUser(yee));
+    @Test
+    void listUsers() throws ResponseException {
+        var expected = new ArrayList<User>();
+        expected.add(serverFacade.addUser(new User("0", "joe", "gmail.com")));
+        expected.add(serverFacade.addUser(new User("yeeyee", "sally", "outlook.com")));
+        var result = assertDoesNotThrow(() -> serverFacade.listUsers());
+        assertUserCollectionEqual(expected, List.of(result));
     }
+
     public static void assertUserEqual(User expected, User actual) {
         assertEquals(expected.userName(), actual.userName());
         assertEquals(expected.password(), actual.password());
         assertEquals(expected.email(), actual.email());
+    }
+
+    @Test
+    void deleteUser() throws Exception {
+        var expected = new ArrayList<User>();
+        expected.add(serverFacade.addUser(new User("0", "sally", "PetType.CAT")));
+
+        var joe = serverFacade.addUser(new User("1", "joe", "PetType.dog"));
+        serverFacade.deleteUser(joe.userName());
+
+        var result = assertDoesNotThrow(() -> serverFacade.listUsers());
+        assertUserCollectionEqual(expected, List.of(result));
+    }
+
+    public static void assertUserCollectionEqual(Collection<User> expected, Collection<User> actual) {
+        User[] actualList = actual.toArray(new User[]{});
+        User[] expectedList = expected.toArray(new User[]{});
+        assertEquals(expectedList.length, actualList.length);
+        for (var i = 0; i < actualList.length; i++) {
+            assertUserEqual(expectedList[i], actualList[i]);
+        }
     }
 }
 

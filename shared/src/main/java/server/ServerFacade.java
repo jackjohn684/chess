@@ -1,7 +1,8 @@
 package server;
-import model.User;
-import exception.ResponseException;
+
 import com.google.gson.Gson;
+import exception.ResponseException;
+import model.User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,12 +21,15 @@ public class ServerFacade {
         return this.makeRequest("POST", path, user, User.class);
     }
 
-    public User getUser(String userName) throws ResponseException {
+    public User[] listUsers() throws ResponseException {
         var path = "/user";
-        var response = this.makeRequest("GET", path, null, getUserResponse.class);
+        record listUserResponse(User[] user) {
+        }
+        var response = this.makeRequest("GET", path, null, listUserResponse.class);
+        return response.user();
     }
-    public void deleteUser(int id) throws ResponseException {
-        var path = String.format("/user/%s", id);
+    public void deleteUser(String userName) throws ResponseException {
+        var path = String.format("/user/%s", userName);
         this.makeRequest("DELETE", path, null, null);
     }
     private <T> T makeRequest(String method, String path, Object request, Class<T> responseClass) throws ResponseException{

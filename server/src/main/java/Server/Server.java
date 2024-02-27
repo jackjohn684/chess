@@ -8,6 +8,7 @@ import service.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
+import java.util.*;
 public class Server {
     private final UserService userService;
     public Server()
@@ -19,8 +20,9 @@ public class Server {
         Spark.port(desiredPort);
 
         Spark.staticFiles.location("web");
-        Spark.get("/user", this::getUser);
+        Spark.get("/user", this::listUsers);
         Spark.post("/user", this::addUser);
+        Spark.delete("/user/:userName", this::deleteUser);
         Spark.awaitInitialization();
         return Spark.port();
     }
@@ -29,10 +31,25 @@ public class Server {
         user = userService.addUser(user);
         return new Gson().toJson(user);
     }
-    private Object getUser(Request req, Response res) throws ResponseException {
-        var userName = new Gson().fromJson(req.body(), String.class);
-        return "nothing";
+    private Object listUsers(Request req, Response res) throws ResponseException {
+        res.type("application/json");
+        var list = userService.listUsers().toArray();
+        return new Gson().toJson(Map.of("user", list));
     }
+
+    private Object deleteUser(Request req, Response res) throws ResponseException {
+        var userName = req.params(":userName");
+        var user = userService.getUser(userName);
+        if (user != null) {
+            userService.deleteUser(userName);
+            res.status(204);
+        }
+        else {
+            res.status(404);
+        }
+        return "";
+    }
+
     public static void stop() {
         Spark.stop();
         Spark.awaitStop();
