@@ -20,6 +20,10 @@ public class MemoryDataAccess implements DataAccess {
         authTokens.put(username, auth);
         return auth;
     }
+    public void deleteAuthToken(String username) {
+        authTokens.remove(username);
+    }
+
     public Collection<User> listUsers(){
         return users.values();
     }
@@ -28,7 +32,7 @@ public class MemoryDataAccess implements DataAccess {
     public void deleteUser(String username) {users.remove(username);}
 
     public User getUser(String username) {return users.get(username);}
-
+    public AuthToken getAuthToken(String username) { return authTokens.get(username);}
     public void clearUsers() {users.clear();}
 
     public void clear() {users.clear(); authTokens.clear();}

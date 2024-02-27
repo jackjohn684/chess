@@ -284,7 +284,7 @@ public class StandardAPITests {
         //log out existing user
         TestModels.TestResult result = serverFacade.logout(existingAuth);
 
-        Assertions.assertEquals(HttpURLConnection.HTTP_OK, serverFacade.getStatusCode(),
+         Assertions.assertEquals(HttpURLConnection.HTTP_OK, serverFacade.getStatusCode(),
                 "Server response code was not 200 OK");
         Assertions.assertFalse(result.message != null && result.message.toLowerCase(Locale.ROOT).contains("error"),
                 "Response gave an error message");

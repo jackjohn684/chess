@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/model/AuthToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/model/ErrorMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/model/LoginCredentials.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/Server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/DataAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataaccess/MemoryDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataaccess/MemoryDataAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/test/java/ServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/ServerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,13 +100,15 @@
     "JUnit.ServerTest.getUser.executor": "Debug",
     "JUnit.ServerTest.listUsers.executor": "Debug",
     "JUnit.StandardAPITests.executor": "Run",
+    "JUnit.StandardAPITests.failRegister.executor": "Debug",
     "JUnit.StandardAPITests.loginInvalidUser.executor": "Run",
     "JUnit.StandardAPITests.loginWrongPassword.executor": "Debug",
     "JUnit.StandardAPITests.registerTwice.executor": "Debug",
     "JUnit.StandardAPITests.staticFiles.executor": "Run",
     "JUnit.StandardAPITests.successLogin.executor": "Debug",
+    "JUnit.StandardAPITests.successLogout.executor": "Debug",
     "JUnit.StandardAPITests.successRegister.executor": "Run",
-    "JUnit.StandardAPITests.uniqueAuthorizationTokens.executor": "Run",
+    "JUnit.StandardAPITests.uniqueAuthorizationTokens.executor": "Debug",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -137,7 +134,17 @@
       <recent name="C:\Users\jackj\classes\cs240\chess\shared\src\test\java\passoffTests\chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests">
+  <component name="RunManager" selected="JUnit.StandardAPITests.successLogout">
+    <configuration name="ServerTest.deleteUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ServerTest" />
+      <option name="METHOD_NAME" value="deleteUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -153,7 +160,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.registerTwice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.failRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -163,13 +170,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="registerTwice" />
+      <option name="METHOD_NAME" value="failRegister" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.successLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.successLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -179,23 +186,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="successLogin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.successRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="successRegister" />
+      <option name="METHOD_NAME" value="successLogout" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -219,11 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StandardAPITests" />
-        <item itemvalue="JUnit.StandardAPITests.successLogin" />
-        <item itemvalue="JUnit.StandardAPITests.registerTwice" />
-        <item itemvalue="JUnit.StandardAPITests.successRegister" />
+        <item itemvalue="JUnit.StandardAPITests.successLogout" />
+        <item itemvalue="JUnit.ServerTest.deleteUser" />
+        <item itemvalue="JUnit.StandardAPITests.failRegister" />
         <item itemvalue="JUnit.StandardAPITests.uniqueAuthorizationTokens" />
+        <item itemvalue="JUnit.StandardAPITests" />
       </list>
     </recent_temporary>
   </component>
@@ -261,7 +252,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java</url>
-          <line>23</line>
+          <line>24</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -273,6 +264,46 @@
           <url>jar://$PROJECT_DIR$/server/lib/passoff-dependencies.jar!/passoffTests/obfuscatedTestClasses/TestServerFacade.class</url>
           <line>38</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/main/java/server/Server.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/main/java/server/Server.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
+          <line>174</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/main/java/server/Server.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/main/java/server/Server.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

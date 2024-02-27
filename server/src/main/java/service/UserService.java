@@ -26,6 +26,12 @@ public class UserService {
     public void deleteUser(String username) throws ResponseException {
         dataAccess.deleteUser(username);
     }
+    public void deleteAuthToken(String username) throws ResponseException {
+        dataAccess.deleteAuthToken(username);
+    }
+    public AuthToken getAuthToken(String username) throws ResponseException {
+       return dataAccess.getAuthToken(username);
+    }
 
     public void clearUsers() throws ResponseException {
         dataAccess.clearUsers();

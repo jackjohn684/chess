@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import exception.ResponseException;
+import model.AuthToken;
 import model.User;
 
 import java.io.IOException;
@@ -23,6 +24,11 @@ public class ServerFacade {
     public User login(User user) throws ResponseException {
         var path = "/session";
         return this.makeRequest("POST", path, user, User.class);
+    }
+    public void logout(AuthToken authToken) throws ResponseException {
+        var path = "/session";
+
+        this.makeRequest("DELETE", path, authToken, null);
     }
     public User[] listUsers() throws ResponseException {
         var path = "/user";

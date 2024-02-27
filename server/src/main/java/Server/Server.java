@@ -29,13 +29,18 @@ public class Server {
         Spark.delete("/user/:username", this::deleteUser);
         Spark.delete("/user", this::clearUsers);
         Spark.delete("/db", this::clear);
-        Spark.post("/session", this::login);
+        Spark.post("/session/", this::login);
+        Spark.delete("/session", this::logout);
         Spark.awaitInitialization();
         return Spark.port();
     }
     private Object register(Request req, Response res) throws ResponseException{
         var user = new Gson().fromJson(req.body(), User.class);
         var existing = userService.getUser(user.username());
+        if (user.username() == null || user.password() == null || user.email() == null){
+            res.status(400);
+            return new Gson().toJson(new ErrorMessage("Error: bad request"));
+        }
         if (existing == null) {
             userService.addUser(user);
             var auth = userService.addAuthToken(user.username());
@@ -69,6 +74,19 @@ public class Server {
         res.type("application/json");
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));
+    }
+    private Object logout(Request req, Response res) throws ResponseException {
+        var username = req.params("username:");
+         var user = userService.getAuthToken(username);
+         if (user != null) {
+             userService.deleteAuthToken(username);
+             res.status(200);
+             return "";
+         }
+         else {
+             res.status(401);
+             return new Gson().toJson(new ErrorMessage("Error"));
+         }
     }
 
     private Object clearUsers(Request req, Response res) throws ResponseException {

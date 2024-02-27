@@ -83,7 +83,7 @@ public class ServerTest {
         assertEquals(expected.password(), actual.password());
         assertEquals(expected.email(), actual.email());
     }
-/*
+
     @Test
     void deleteUser() throws Exception {
         var expected = new ArrayList<User>();
@@ -97,7 +97,6 @@ public class ServerTest {
     }
 
 
- */
     @Test
     void clearUsers() throws Exception {
         var expected = new ArrayList<User>();
