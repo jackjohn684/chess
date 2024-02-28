@@ -1,8 +1,7 @@
-package server;
+/*package server;
 
 import com.google.gson.Gson;
 import exception.ResponseException;
-import model.AuthToken;
 import model.User;
 
 import java.io.IOException;
@@ -25,11 +24,7 @@ public class ServerFacade {
         var path = "/session";
         return this.makeRequest("POST", path, user, User.class);
     }
-    public void logout(AuthToken authToken) throws ResponseException {
-        var path = "/session";
 
-        this.makeRequest("DELETE", path, authToken, null);
-    }
     public User[] listUsers() throws ResponseException {
         var path = "/user";
         record listUserResponse(User[] user) {
@@ -92,3 +87,6 @@ public class ServerFacade {
     }
 }
 
+
+
+ */

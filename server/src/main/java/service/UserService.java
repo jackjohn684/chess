@@ -26,11 +26,11 @@ public class UserService {
     public void deleteUser(String username) throws ResponseException {
         dataAccess.deleteUser(username);
     }
-    public void deleteAuthToken(String username) throws ResponseException {
-        dataAccess.deleteAuthToken(username);
+    public void deleteAuthToken(String auth) throws ResponseException {
+        dataAccess.deleteAuthToken(auth);
     }
-    public AuthToken getAuthToken(String username) throws ResponseException {
-       return dataAccess.getAuthToken(username);
+    public AuthToken getAuthToken(String auth) throws ResponseException {
+       return dataAccess.getAuthToken(auth);
     }
 
     public void clearUsers() throws ResponseException {

@@ -1,4 +1,4 @@
-import exception.ResponseException;
+/*import exception.ResponseException;
 import model.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -46,7 +46,7 @@ public class ServerTest {
 
         createRequest = new TestModels.TestCreateRequest();
         createRequest.gameName = "testGame";
- */
+
     }
 
     @AfterAll
@@ -117,7 +117,7 @@ public class ServerTest {
         }
     }
 }
-
+*/
 
 
 

@@ -3,21 +3,24 @@ package server;
 import com.google.gson.Gson;
 import dataaccess.MemoryDataAccess;
 import exception.ResponseException;
-import model.ErrorMessage;
-import model.LoginCredentials;
-import model.User;
-import service.*;
+import model.*;
+import service.ClearService;
+import service.GameService;
+import service.UserService;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
-import java.util.*;
+
+import java.util.Map;
 public class Server {
     private final UserService userService;
     private final ClearService clearService;
+    private final GameService gameService;
     public Server()
     {
         userService = new UserService(new MemoryDataAccess());
         clearService = new ClearService (new MemoryDataAccess());
+        gameService = new GameService (new MemoryDataAccess());
     }
 
     public int run(int desiredPort) {
@@ -29,8 +32,10 @@ public class Server {
         Spark.delete("/user/:username", this::deleteUser);
         Spark.delete("/user", this::clearUsers);
         Spark.delete("/db", this::clear);
-        Spark.post("/session/", this::login);
+        Spark.post("/session", this::login);
         Spark.delete("/session", this::logout);
+        Spark.post("/game", this::createGame);
+        Spark.put("/game", this::joinGame);
         Spark.awaitInitialization();
         return Spark.port();
     }
@@ -50,6 +55,35 @@ public class Server {
             res.status(403);
             return new Gson().toJson(new ErrorMessage("Error: already taken"));
         }
+    }
+
+    private Object createGame(Request req, Response res) throws ResponseException {
+        var auth = req.headers("authorization");
+        var gameName = new Gson().fromJson(req.body(), GameName.class);
+        var user = userService.getAuthToken(auth);
+        if (user != null)
+        {
+            res.status(200);
+            var myGameId = gameService.createGame(auth, gameName.gameName());
+            return new Gson().toJson(myGameId);
+        }
+        else{
+            res.status(401);
+            return new Gson().toJson(new ErrorMessage("Error"));
+        }
+    }
+    private Object joinGame(Request req, Response res) throws ResponseException {
+        var auth = req.headers("authorization");
+        var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
+        var user = userService.getAuthToken(auth);
+        if(user != null){
+            gameService.joinGame(gameInfo.gameID(), gameInfo.playerColor());
+
+        }else {
+            res.status(401);
+            return new Gson().toJson(new ErrorMessage("Error"));
+        }
+        return gameInfo;
     }
     private Object login(Request req, Response res) throws ResponseException {
         LoginCredentials user = new Gson().fromJson(req.body(), LoginCredentials.class);
@@ -76,10 +110,10 @@ public class Server {
         return new Gson().toJson(Map.of("user", list));
     }
     private Object logout(Request req, Response res) throws ResponseException {
-        var username = req.params("username:");
-         var user = userService.getAuthToken(username);
+        var auth = req.headers("authorization");
+         var user = userService.getAuthToken(auth);
          if (user != null) {
-             userService.deleteAuthToken(username);
+             userService.deleteAuthToken(auth);
              res.status(200);
              return "";
          }
