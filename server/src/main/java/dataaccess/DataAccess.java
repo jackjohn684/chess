@@ -1,6 +1,7 @@
 package dataaccess;
 
 import model.AuthToken;
+import model.Game;
 import model.User;
 import model.gameID;
 
@@ -16,7 +17,10 @@ public interface DataAccess {
     public AuthToken addAuthToken(String username);
     public gameID createGame(String auth, String gameName);
     public AuthToken getAuthToken(String auth);
-    public void joinGame(int gameID, String playerColor);
+    public String joinGame(int gameID, String playerColor, String username);
+    public Game getGame(int gameID);
+    public void clearGames();
+    public Collection<Game> listGames();
 
 
     public void clear();

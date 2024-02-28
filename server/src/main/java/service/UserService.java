@@ -35,5 +35,6 @@ public class UserService {
 
     public void clearUsers() throws ResponseException {
         dataAccess.clearUsers();
+
     }
 }

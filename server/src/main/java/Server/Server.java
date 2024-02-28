@@ -36,6 +36,7 @@ public class Server {
         Spark.delete("/session", this::logout);
         Spark.post("/game", this::createGame);
         Spark.put("/game", this::joinGame);
+        Spark.get("/game", this::listGames);
         Spark.awaitInitialization();
         return Spark.port();
     }
@@ -73,17 +74,29 @@ public class Server {
         }
     }
     private Object joinGame(Request req, Response res) throws ResponseException {
+        String statusCode = "";
         var auth = req.headers("authorization");
         var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
         var user = userService.getAuthToken(auth);
         if(user != null){
-            gameService.joinGame(gameInfo.gameID(), gameInfo.playerColor());
-
+            statusCode = gameService.joinGame(gameInfo.gameID(), gameInfo.playerColor(), user.getUsername());
+            if (statusCode.equals("403"))
+            {
+                res.status(403);
+                return new Gson().toJson(new ErrorMessage("ERROR"));
+            }
+            else if (statusCode.equals("400"))
+            {
+                res.status(400);
+                return new Gson().toJson(new ErrorMessage("ERROR"));
+            } else {
+            res.status(200);
+            return new Gson().toJson(gameInfo);
+            }
         }else {
             res.status(401);
             return new Gson().toJson(new ErrorMessage("Error"));
         }
-        return gameInfo;
     }
     private Object login(Request req, Response res) throws ResponseException {
         LoginCredentials user = new Gson().fromJson(req.body(), LoginCredentials.class);
@@ -109,6 +122,13 @@ public class Server {
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));
     }
+    private Object listGames(Request req, Response res) throws ResponseException {
+        var auth = req.headers("authorization");
+        var user = userService.getAuthToken(auth);
+        res.type("application/json");
+        var list = gameService.listGames().toArray();
+        return new Gson().toJson(Map.of("games", list));
+    }
     private Object logout(Request req, Response res) throws ResponseException {
         var auth = req.headers("authorization");
          var user = userService.getAuthToken(auth);
@@ -129,8 +149,8 @@ public class Server {
         return "";
     }
     private Object clear(Request req, Response res) throws ResponseException {
-        clearService.clear();
-        res.status(204);
+        clearService.clear(userService,gameService);
+        res.status(200);
         return "";
     }
 
