@@ -60,12 +60,12 @@ public class Server {
 
     private Object createGame(Request req, Response res) throws ResponseException {
         var auth = req.headers("authorization");
-        var gameName = new Gson().fromJson(req.body(), GameName.class);
+        var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
         var user = userService.getAuthToken(auth);
         if (user != null)
         {
             res.status(200);
-            var myGameId = gameService.createGame(auth, gameName.gameName());
+            var myGameId = gameService.createGame(auth, gameInfo.gameName());
             return new Gson().toJson(myGameId);
         }
         else{
@@ -99,7 +99,7 @@ public class Server {
         }
     }
     private Object login(Request req, Response res) throws ResponseException {
-        LoginCredentials user = new Gson().fromJson(req.body(), LoginCredentials.class);
+        User user = new Gson().fromJson(req.body(), User.class);
         var test = userService.getUser(user.username());
         if(test != null) {
             if (test.password().equals(user.password())) {
@@ -125,6 +125,10 @@ public class Server {
     private Object listGames(Request req, Response res) throws ResponseException {
         var auth = req.headers("authorization");
         var user = userService.getAuthToken(auth);
+        if (user == null){
+            res.status(401);
+            return new Gson().toJson(new ErrorMessage("Error: 401"));
+        }
         res.type("application/json");
         var list = gameService.listGames().toArray();
         return new Gson().toJson(Map.of("games", list));
