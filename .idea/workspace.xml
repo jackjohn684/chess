@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/ServiceTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/ServerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java" afterDir="false" />
-    </list>
+    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,6 +84,7 @@
     "JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor": "Debug",
     "JUnit.PawnMoveTests.pawnPromotionCapture.executor": "Debug",
     "JUnit.PawnMoveTests.pawnPromotionWhite.executor": "Debug",
+    "JUnit.PersistenceTests.executor": "Run",
     "JUnit.QueenMoveTests.executor": "Debug",
     "JUnit.QueenMoveTests.queenMoveUntilEdge.executor": "Debug",
     "JUnit.RookMoveTests.executor": "Debug",
@@ -143,7 +139,22 @@
       <recent name="C:\Users\jackj\classes\cs240\chess\shared\src\test\java\passoffTests\chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests">
+  <component name="RunManager" selected="JUnit.PersistenceTests">
+    <configuration name="PersistenceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.PersistenceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -207,29 +218,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.goodJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="goodJoin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PersistenceTests" />
         <item itemvalue="JUnit.StandardAPITests" />
         <item itemvalue="JUnit.StandardAPITests.clearData" />
         <item itemvalue="JUnit.StandardAPITests.badGameIDJoin" />
         <item itemvalue="JUnit.StandardAPITests.badColorJoin" />
-        <item itemvalue="JUnit.StandardAPITests.goodJoin" />
       </list>
     </recent_temporary>
   </component>
