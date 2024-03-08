@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("unused")
