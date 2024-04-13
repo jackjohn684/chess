@@ -1,9 +1,12 @@
 package server;
 
 import com.google.gson.Gson;
-import dataaccess.MemoryDataAccess;
+import dataAccess.DataAccessException;
+import dataAccess.MemoryDataAccess;
 import exception.ResponseException;
-import model.*;
+import model.ErrorMessage;
+import model.GameInfo;
+import model.User;
 import service.ClearService;
 import service.GameService;
 import service.UserService;
@@ -11,6 +14,7 @@ import spark.Request;
 import spark.Response;
 import spark.Spark;
 
+import java.sql.SQLException;
 import java.util.Map;
 public class Server {
     private final UserService userService;
@@ -40,7 +44,7 @@ public class Server {
         Spark.awaitInitialization();
         return Spark.port();
     }
-    private Object register(Request req, Response res) throws ResponseException{
+    private Object register(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var user = new Gson().fromJson(req.body(), User.class);
         var existing = userService.getUser(user.username());
         if (user.username() == null || user.password() == null || user.email() == null){
@@ -98,7 +102,7 @@ public class Server {
             return new Gson().toJson(new ErrorMessage("Error"));
         }
     }
-    private Object login(Request req, Response res) throws ResponseException {
+    private Object login(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         User user = new Gson().fromJson(req.body(), User.class);
         var test = userService.getUser(user.username());
         if(test != null) {
@@ -158,7 +162,7 @@ public class Server {
         return "";
     }
 
-    private Object deleteUser(Request req, Response res) throws ResponseException {
+    private Object deleteUser(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var userName = req.params(":username");
         var user = userService.getUser(userName);
         if (user != null) {

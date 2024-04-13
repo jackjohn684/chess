@@ -1,6 +1,6 @@
 package passoffTests.serverTests;
 
-import dataaccess.MemoryDataAccess;
+import dataAccess.MemoryDataAccess;
 import exception.ResponseException;
 import org.junit.jupiter.api.BeforeEach;
 import service.ClearService;

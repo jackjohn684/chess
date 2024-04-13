@@ -1,6 +1,6 @@
 package service;
 
-import dataaccess.DataAccess;
+import dataAccess.DataAccess;
 import exception.ResponseException;
 
 public class ClearService {
