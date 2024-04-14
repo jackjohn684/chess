@@ -8,6 +8,7 @@ import model.gameID;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
@@ -15,7 +16,6 @@ public class MemoryDataAccess implements DataAccess {
 
     final private HashMap<String, User> users = new HashMap<>();
     final private HashMap<String, AuthToken> authTokens = new HashMap<>();
-    final private HashMap<Integer, Game> games = new HashMap<>();
     public User addUser(User user) throws SQLException, DataAccessException {
         Connection conn = DatabaseManager.getConnection();
         try (var preparedStatement = conn.prepareStatement("INSERT INTO user (username, password, email) VALUES(?, ?, ?)")) {
@@ -39,23 +39,61 @@ public class MemoryDataAccess implements DataAccess {
     public void deleteAuthToken(String auth) {
         authTokens.remove(auth);
     }
-    public gameID createGame(String auth, String gameName){
+    public gameID createGame(String auth, String gameName) throws DataAccessException, SQLException {
         Random rnd = new Random();
         int randomNumber = 1000 + rnd.nextInt(9000);
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("INSERT INTO game (gameName, gameID) VALUES(?,?)")){
+            preparedStatement.setString(1, gameName);
+            preparedStatement.setInt(2,randomNumber);
+            preparedStatement.executeUpdate();
+        }
         var myGameId = new gameID(randomNumber);
-        games.put(myGameId.gameID(), new Game(myGameId.gameID(), null, null, gameName, new ChessGame()) );
         return myGameId;
     }
-
+    public String makeGame(Game game) throws DataAccessException, SQLException {
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("INSERT INTO game (gameName, whiteUsername, blackUsername, gameID) VALUES(?,?,?,?)")){
+            preparedStatement.setString(1, game.gameName());
+            preparedStatement.setString(2, game.whiteUsername());
+            preparedStatement.setString(3, game.blackUsername());
+            preparedStatement.setInt(4, game.gameID());
+            preparedStatement.executeUpdate();
+        }
+        return "yee";
+    }
     public Collection<User> listUsers(){
         return users.values();
     }
-    public Collection<Game> listGames() { return games.values();}
+    public Collection<Game> listGames() throws DataAccessException, SQLException {
+        ArrayList<Game> games = new ArrayList<Game>();
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game")){
+            try(var rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    var gameID = rs.getInt("gameID");
+                    var whiteUsername = rs.getString("whiteUsername");
+                    var blackUsername = rs.getString("blackUsername");
+                    var gameName = rs.getString("gameName");
+                   Game game = new Game(gameID, whiteUsername, blackUsername, gameName, new ChessGame());
+                   games.add(game);
+                }
+            }
+        }
+        return games;
+    }
 
     public void deleteUser(String username) throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
         try (var preparedStatement = conn.prepareStatement("DELETE from user where username = ?")){
             preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+        }
+    }
+    public void deleteGame(int gameID) throws DataAccessException, SQLException {
+        Connection conn = DatabaseManager.getConnection();
+        try (var preparedStatement = conn.prepareStatement("DELETE from game where gameID = ?")){
+            preparedStatement.setInt(1, gameID);
             preparedStatement.executeUpdate();
         }
     }
@@ -65,7 +103,7 @@ public class MemoryDataAccess implements DataAccess {
         try(var preparedStatement = conn.prepareStatement("SELECT username, password, email from user WHERE username = ?")) {
             preparedStatement.setString(1, username);
             try (var rs = preparedStatement.executeQuery()) {
-                if(rs.getFetchSize() > 0) {
+                if(rs.next()) {
                     var otherUsername = rs.getString("username");
                     var password = rs.getString("password");
                     var email = rs.getString("email");
@@ -75,26 +113,62 @@ public class MemoryDataAccess implements DataAccess {
         }
         return user;
     }
-    public AuthToken getAuthToken(String auth) { return authTokens.get(auth);}
+    public AuthToken getAuthToken(String auth) throws DataAccessException, SQLException {
+        AuthToken auth1 = null;
+        Connection conn = DatabaseManager.getConnection();
+        try (var preparedStatement = conn.prepareStatement("SELECT authToken, username from auth WHERE authToken=?")) {
+            preparedStatement.setString(1, auth);
+            try (var rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    var authToken = rs.getString("authToken");
+                    var username = rs.getString("username");
+                    auth1 = new AuthToken(username, authToken);
+                }
+            }
+        }
+        return auth1;
+    }
     public void clearUsers() throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
-        try(var preparedStatement = conn.prepareStatement("DROP TABLE auth; DROP TABLE user;")){
+        try(var preparedStatement = conn.prepareStatement("DROP TABLE auth;")){
+            preparedStatement.executeUpdate();
+        }
+        try(var preparedStatement = conn.prepareStatement("DROP TABLE user;")){
             preparedStatement.executeUpdate();
         }
     }
-    public void clearGames(){games.clear();}
-
-    public void clear() {
-        users.clear();
-        authTokens.clear();
-        games.clear();
-    }
-    public Game getGame(int gameID){
-        return games.get(gameID);
+    public void clearGames() throws DataAccessException, SQLException {
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("DROP TABLE game")) {
+            preparedStatement.executeUpdate();
+        }
     }
 
-    public String joinGame(int gameID, String playerColor, String username) {
-        var oldGame = games.get(gameID);
+    public void clear() throws SQLException, DataAccessException {
+        clearUsers();
+        clearGames();
+    }
+    public Game getGame(int gameID) throws DataAccessException, SQLException {
+        Game game = null;
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game WHERE gameID = ?")){
+            preparedStatement.setInt(1, gameID);
+            try(var rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    var whiteUsername = rs.getString("whiteUsername");
+                    var blackUsername = rs.getString("blackUsername");
+                    var gameName = rs.getString("gameName");
+
+                   game = new Game(gameID, whiteUsername, blackUsername, gameName, new ChessGame());
+                }
+            }
+        }
+        return game;
+    }
+
+
+    public String joinGame(int gameID, String playerColor, String username) throws SQLException, DataAccessException {
+        var oldGame = getGame(gameID);
         if (oldGame == null || oldGame.gameID() != gameID){
             return  "400";
         }
@@ -116,9 +190,9 @@ public class MemoryDataAccess implements DataAccess {
                 return "403";
             }
         }
-        games.remove(gameID);
+        deleteGame(gameID);
         assert newGame != null;
-        games.put(newGame.gameID(), newGame);
+        makeGame(newGame);
         return "";
 
     }

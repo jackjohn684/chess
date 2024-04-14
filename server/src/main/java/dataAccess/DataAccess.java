@@ -15,14 +15,16 @@ public interface DataAccess {
     public void deleteUser(String userName) throws DataAccessException, SQLException;
     public void deleteAuthToken(String auth);
     public void clearUsers() throws DataAccessException, SQLException;
+    public void deleteGame(int gameID) throws DataAccessException, SQLException;
     public AuthToken addAuthToken(String username) throws SQLException, DataAccessException;
-    public gameID createGame(String auth, String gameName);
-    public AuthToken getAuthToken(String auth);
-    public String joinGame(int gameID, String playerColor, String username);
-    public Game getGame(int gameID);
-    public void clearGames();
-    public Collection<Game> listGames();
+    public gameID createGame(String auth, String gameName) throws DataAccessException, SQLException;
+    public String makeGame(Game game) throws DataAccessException, SQLException;
+    public AuthToken getAuthToken(String auth) throws DataAccessException, SQLException;
+    public String joinGame(int gameID, String playerColor, String username) throws SQLException, DataAccessException;
+    public Game getGame(int gameID) throws DataAccessException, SQLException;
+    public void clearGames() throws DataAccessException, SQLException;
+    public Collection<Game> listGames() throws DataAccessException, SQLException;
 
 
-    public void clear();
+    public void clear() throws SQLException, DataAccessException;
 }

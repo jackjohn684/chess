@@ -11,6 +11,10 @@ public class AuthToken {
         this.username = username;
         this.authToken = UUID.randomUUID().toString();
     }
+    public AuthToken(String username, String auth){
+        this.username = username;
+        this.authToken = auth;
+    }
     public String getUsername()
     {
         return username;

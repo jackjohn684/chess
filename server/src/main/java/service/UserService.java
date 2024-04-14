@@ -30,7 +30,7 @@ public class UserService {
     public void deleteAuthToken(String auth) throws ResponseException {
         dataAccess.deleteAuthToken(auth);
     }
-    public AuthToken getAuthToken(String auth) throws ResponseException {
+    public AuthToken getAuthToken(String auth) throws ResponseException, SQLException, DataAccessException {
        return dataAccess.getAuthToken(auth);
     }
 

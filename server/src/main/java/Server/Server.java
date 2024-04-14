@@ -62,7 +62,7 @@ public class Server {
         }
     }
 
-    private Object createGame(Request req, Response res) throws ResponseException {
+    private Object createGame(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
         var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
         var user = userService.getAuthToken(auth);
@@ -77,7 +77,7 @@ public class Server {
             return new Gson().toJson(new ErrorMessage("Error"));
         }
     }
-    private Object joinGame(Request req, Response res) throws ResponseException {
+    private Object joinGame(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         String statusCode = "";
         var auth = req.headers("authorization");
         var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
@@ -126,7 +126,7 @@ public class Server {
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));
     }
-    private Object listGames(Request req, Response res) throws ResponseException {
+    private Object listGames(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
         var user = userService.getAuthToken(auth);
         if (user == null){
@@ -137,7 +137,7 @@ public class Server {
         var list = gameService.listGames().toArray();
         return new Gson().toJson(Map.of("games", list));
     }
-    private Object logout(Request req, Response res) throws ResponseException {
+    private Object logout(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
          var user = userService.getAuthToken(auth);
          if (user != null) {
@@ -151,12 +151,12 @@ public class Server {
          }
     }
 
-    private Object clearUsers(Request req, Response res) throws ResponseException {
+    private Object clearUsers(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         userService.clearUsers();
         res.status(204);
         return "";
     }
-    private Object clear(Request req, Response res) throws ResponseException {
+    private Object clear(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         clearService.clear(userService,gameService);
         res.status(200);
         return "";
