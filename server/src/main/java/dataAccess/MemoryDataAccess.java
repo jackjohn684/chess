@@ -15,7 +15,6 @@ import java.util.Random;
 public class MemoryDataAccess implements DataAccess {
 
     final private HashMap<String, User> users = new HashMap<>();
-    final private HashMap<String, AuthToken> authTokens = new HashMap<>();
     public User addUser(User user) throws SQLException, DataAccessException {
         Connection conn = DatabaseManager.getConnection();
         try (var preparedStatement = conn.prepareStatement("INSERT INTO user (username, password, email) VALUES(?, ?, ?)")) {
@@ -24,6 +23,7 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setString(3, user.email());
             preparedStatement.executeUpdate();
         }
+        conn.close();
         return user;
     }
     public AuthToken addAuthToken(String username) throws SQLException, DataAccessException {
@@ -34,11 +34,10 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setString(2, auth.getUsername());
             preparedStatement.executeUpdate();
         }
+        conn.close();
         return auth;
     }
-    public void deleteAuthToken(String auth) {
-        authTokens.remove(auth);
-    }
+
     public gameID createGame(String auth, String gameName) throws DataAccessException, SQLException {
         Random rnd = new Random();
         int randomNumber = 1000 + rnd.nextInt(9000);
@@ -49,6 +48,7 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.executeUpdate();
         }
         var myGameId = new gameID(randomNumber);
+        conn.close();
         return myGameId;
     }
     public String makeGame(Game game) throws DataAccessException, SQLException {
@@ -60,17 +60,32 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setInt(4, game.gameID());
             preparedStatement.executeUpdate();
         }
+        conn.close();
         return "yee";
     }
-    public Collection<User> listUsers(){
-        return users.values();
+    public Collection<User> listUsers() throws DataAccessException, SQLException {
+        ArrayList<User> users = new ArrayList<User>();
+        Connection conn = DatabaseManager.getConnection();
+        try(var preparedStatement = conn.prepareStatement("SELECT username, password, user from user")) {
+            try (var rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    var username = rs.getString("username");
+                    var password = rs.getString("password");
+                    var email = rs.getString("email");
+                    User user = new User(username, password, email);
+                    users.add(user);
+                }
+            }
+        }
+        conn.close();
+        return users;
     }
     public Collection<Game> listGames() throws DataAccessException, SQLException {
         ArrayList<Game> games = new ArrayList<Game>();
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game")){
             try(var rs = preparedStatement.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     var gameID = rs.getInt("gameID");
                     var whiteUsername = rs.getString("whiteUsername");
                     var blackUsername = rs.getString("blackUsername");
@@ -80,6 +95,7 @@ public class MemoryDataAccess implements DataAccess {
                 }
             }
         }
+        conn.close();
         return games;
     }
 
@@ -89,13 +105,24 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setString(1, username);
             preparedStatement.executeUpdate();
         }
+        conn.close();
     }
+    public void deleteAuthToken(String auth) throws DataAccessException, SQLException {
+        Connection conn = DatabaseManager.getConnection();
+        try (var preparedStatement = conn.prepareStatement("DELETE from auth where authToken = ?")){
+            preparedStatement.setString(1, auth);
+            preparedStatement.executeUpdate();
+        }
+        conn.close();
+    }
+
     public void deleteGame(int gameID) throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
         try (var preparedStatement = conn.prepareStatement("DELETE from game where gameID = ?")){
             preparedStatement.setInt(1, gameID);
             preparedStatement.executeUpdate();
         }
+        conn.close();
     }
     public User getUser(String username) throws DataAccessException, SQLException {
         User user = null;
@@ -111,6 +138,7 @@ public class MemoryDataAccess implements DataAccess {
                 }
             }
         }
+        conn.close();
         return user;
     }
     public AuthToken getAuthToken(String auth) throws DataAccessException, SQLException {
@@ -126,6 +154,7 @@ public class MemoryDataAccess implements DataAccess {
                 }
             }
         }
+        conn.close();
         return auth1;
     }
     public void clearUsers() throws DataAccessException, SQLException {
@@ -136,12 +165,14 @@ public class MemoryDataAccess implements DataAccess {
         try(var preparedStatement = conn.prepareStatement("DROP TABLE user;")){
             preparedStatement.executeUpdate();
         }
+        conn.close();
     }
     public void clearGames() throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("DROP TABLE game")) {
             preparedStatement.executeUpdate();
         }
+        conn.close();
     }
 
     public void clear() throws SQLException, DataAccessException {
@@ -163,6 +194,7 @@ public class MemoryDataAccess implements DataAccess {
                 }
             }
         }
+        conn.close();
         return game;
     }
 

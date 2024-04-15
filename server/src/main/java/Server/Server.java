@@ -26,10 +26,9 @@ public class Server {
         clearService = new ClearService (new MemoryDataAccess());
         gameService = new GameService (new MemoryDataAccess());
     }
-
+    public int port() { return Spark.port();}
     public int run(int desiredPort) {
         Spark.port(desiredPort);
-
         Spark.staticFiles.location("web");
         Spark.get("/user", this::listUsers);
         Spark.post("/user", this::register);
@@ -121,7 +120,7 @@ public class Server {
             return new Gson().toJson(new ErrorMessage("Error: unauthorized"));
         }
     }
-    private Object listUsers(Request req, Response res) throws ResponseException {
+    private Object listUsers(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         res.type("application/json");
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));

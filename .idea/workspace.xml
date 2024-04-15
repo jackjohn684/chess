@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="" />
+    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ui/Repl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ui/State.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/ServerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryDataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/UserService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +30,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -40,6 +54,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
     "JUnit.BishopMoveTests.bishopBlocked.executor": "Debug",
     "JUnit.BishopMoveTests.bishopCaptureEnemy.executor": "Debug",
@@ -85,33 +100,39 @@
     "JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor": "Debug",
     "JUnit.PawnMoveTests.pawnPromotionCapture.executor": "Debug",
     "JUnit.PawnMoveTests.pawnPromotionWhite.executor": "Debug",
-    "JUnit.PersistenceTests.executor": "Debug",
+    "JUnit.PersistenceTests.executor": "Run",
     "JUnit.PersistenceTests.persistenceTest.executor": "Debug",
     "JUnit.QueenMoveTests.executor": "Debug",
     "JUnit.QueenMoveTests.queenMoveUntilEdge.executor": "Debug",
     "JUnit.RookMoveTests.executor": "Debug",
-    "JUnit.ServerTest.addUser.executor": "Run",
+    "JUnit.ServerTest.addUser (1).executor": "Debug",
+    "JUnit.ServerTest.addUser.executor": "Debug",
     "JUnit.ServerTest.clearUsers.executor": "Debug",
     "JUnit.ServerTest.deleteUser.executor": "Debug",
     "JUnit.ServerTest.getUser.executor": "Debug",
     "JUnit.ServerTest.listUsers.executor": "Debug",
-    "JUnit.StandardAPITests.badAuthCreate.executor": "Debug",
+    "JUnit.ServerTest.register.executor": "Debug",
+    "JUnit.StandardAPITests.badAuthCreate.executor": "Run",
+    "JUnit.StandardAPITests.badAuthJoin.executor": "Run",
     "JUnit.StandardAPITests.badAuthWatch.executor": "Run",
     "JUnit.StandardAPITests.badColorJoin.executor": "Run",
     "JUnit.StandardAPITests.badGameIDJoin.executor": "Run",
     "JUnit.StandardAPITests.badGameIDWatch.executor": "Run",
-    "JUnit.StandardAPITests.clearData.executor": "Debug",
-    "JUnit.StandardAPITests.executor": "Run",
-    "JUnit.StandardAPITests.failLogout.executor": "Debug",
+    "JUnit.StandardAPITests.clearData.executor": "Run",
+    "JUnit.StandardAPITests.executor": "Debug",
+    "JUnit.StandardAPITests.failLogout.executor": "Run",
     "JUnit.StandardAPITests.failRegister.executor": "Debug",
-    "JUnit.StandardAPITests.goodCreate.executor": "Run",
+    "JUnit.StandardAPITests.gamesList.executor": "Run",
+    "JUnit.StandardAPITests.goodCreate.executor": "Debug",
     "JUnit.StandardAPITests.goodJoin.executor": "Run",
     "JUnit.StandardAPITests.goodWatch.executor": "Run",
     "JUnit.StandardAPITests.loginInvalidUser.executor": "Run",
     "JUnit.StandardAPITests.loginWrongPassword.executor": "Debug",
     "JUnit.StandardAPITests.manyWatch.executor": "Run",
+    "JUnit.StandardAPITests.multipleClear.executor": "Run",
+    "JUnit.StandardAPITests.noGamesList.executor": "Run",
     "JUnit.StandardAPITests.registerTwice.executor": "Debug",
-    "JUnit.StandardAPITests.staticFiles.executor": "Run",
+    "JUnit.StandardAPITests.staticFiles.executor": "Debug",
     "JUnit.StandardAPITests.successLogin.executor": "Debug",
     "JUnit.StandardAPITests.successLogout.executor": "Run",
     "JUnit.StandardAPITests.successRegister.executor": "Run",
@@ -124,7 +145,7 @@
     "git-widget-placeholder": "main",
     "jdk.selected.JAVA_MODULE": "corretto-21",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/jackj/classes/cs240/chess",
+    "last_opened_file_path": "C:/Users/jackj/classes/cs240/chess/client/src/test/java/clientTests",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -133,6 +154,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jackj\classes\cs240\chess\client\src\test\java\clientTests" />
       <recent name="C:\Users\jackj\classes\cs240\chess\server\src\main\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -141,24 +163,50 @@
       <recent name="C:\Users\jackj\classes\cs240\chess\shared\src\test\java\passoffTests\chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PersistenceTests.persistenceTest">
-    <configuration name="DatabaseTests.register" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="ServerTest.addUser (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="otherTests.*" />
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="otherTests" />
-      <option name="MAIN_CLASS_NAME" value="otherTests.DatabaseTests" />
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.ServerTest" />
+      <option name="METHOD_NAME" value="addUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.addUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ServerTest" />
+      <option name="METHOD_NAME" value="addUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerTest.register" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.ServerTest" />
       <option name="METHOD_NAME" value="register" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PersistenceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.staticFiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -167,29 +215,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.PersistenceTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PersistenceTests.persistenceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.PersistenceTests" />
-      <option name="METHOD_NAME" value="persistenceTest" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="staticFiles" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.successLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -199,22 +232,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.clearData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="clearData" />
+      <option name="METHOD_NAME" value="successLogin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -222,11 +240,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PersistenceTests.persistenceTest" />
-        <item itemvalue="JUnit.DatabaseTests.register" />
-        <item itemvalue="JUnit.PersistenceTests" />
-        <item itemvalue="JUnit.StandardAPITests" />
-        <item itemvalue="JUnit.StandardAPITests.clearData" />
+        <item itemvalue="JUnit.ServerTest.addUser (1)" />
+        <item itemvalue="JUnit.ServerTest.addUser" />
+        <item itemvalue="JUnit.ServerTest.register" />
+        <item itemvalue="JUnit.StandardAPITests.successLogin" />
+        <item itemvalue="JUnit.StandardAPITests.staticFiles" />
       </list>
     </recent_temporary>
   </component>
@@ -263,41 +281,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/server/lib/passoff-dependencies.jar!/passoffTests/obfuscatedTestClasses/TestServerFacade.class</url>
-          <line>76</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/server/lib/passoff-dependencies.jar!/passoffTests/obfuscatedTestClasses/TestServerFacade.class</url>
-          <line>79</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$PROJECT_DIR$/server/lib/passoff-dependencies.jar!/passoffTests/obfuscatedTestClasses/TestServerFacade.class</url>
-          <line>88</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>363</line>
-          <option name="timeStamp" value="109" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>788</line>
-          <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>787</line>
-          <option name="timeStamp" value="125" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/server/src/test/java/otherTests/DatabaseTests.java</url>
           <line>46</line>
           <option name="timeStamp" value="157" />
@@ -306,6 +289,25 @@
           <url>file://$PROJECT_DIR$/server/src/test/java/otherTests/DatabaseTests.java</url>
           <line>41</line>
           <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="223" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/ServerTest.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/ServerTest.java</url>
+          <line>33</line>
+          <properties class="passoffTests.serverTests.ServerTest" method="clear">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="230" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

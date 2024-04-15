@@ -10,10 +10,10 @@ import java.util.Collection;
 
 public interface DataAccess {
     User addUser(User user) throws SQLException, DataAccessException;
-    public Collection<User> listUsers();
+    public Collection<User> listUsers() throws DataAccessException, SQLException;
     public User getUser(String userName) throws DataAccessException, SQLException;
     public void deleteUser(String userName) throws DataAccessException, SQLException;
-    public void deleteAuthToken(String auth);
+    public void deleteAuthToken(String auth) throws DataAccessException, SQLException;
     public void clearUsers() throws DataAccessException, SQLException;
     public void deleteGame(int gameID) throws DataAccessException, SQLException;
     public AuthToken addAuthToken(String username) throws SQLException, DataAccessException;

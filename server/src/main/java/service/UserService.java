@@ -18,7 +18,7 @@ public class UserService {
     public AuthToken addAuthToken(String username) throws ResponseException, SQLException, DataAccessException {
         return dataAccess.addAuthToken(username);
     }
-    public Collection<User> listUsers() throws ResponseException {
+    public Collection<User> listUsers() throws ResponseException, SQLException, DataAccessException {
         return dataAccess.listUsers();
     }
     public User getUser(String username) throws ResponseException, SQLException, DataAccessException {
@@ -27,7 +27,7 @@ public class UserService {
     public void deleteUser(String username) throws ResponseException, SQLException, DataAccessException {
         dataAccess.deleteUser(username);
     }
-    public void deleteAuthToken(String auth) throws ResponseException {
+    public void deleteAuthToken(String auth) throws ResponseException, SQLException, DataAccessException {
         dataAccess.deleteAuthToken(auth);
     }
     public AuthToken getAuthToken(String auth) throws ResponseException, SQLException, DataAccessException {
