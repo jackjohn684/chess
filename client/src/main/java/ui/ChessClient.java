@@ -1,19 +1,24 @@
 package ui;
 
 import exception.ResponseException;
+import model.AuthToken;
+import model.Game;
 import model.User;
-import org.junit.jupiter.api.Assertions;
+import server.Server;
 import server.ServerFacade;
 
-import java.net.HttpURLConnection;
 import java.util.Arrays;
+
 public class ChessClient {
     private String visitorName = null;
     private final ServerFacade server;
     private final String serverUrl;
+    private final Server chessServer;
     private State state = State.SIGNEDOUT;
-
+    private AuthToken authToken;
     public ChessClient(String serverUrl) {
+        chessServer = new Server();
+        chessServer.run(8080);
         server = new ServerFacade(serverUrl);
         this.serverUrl = serverUrl;
     }
@@ -24,8 +29,10 @@ public class ChessClient {
             var cmd = (tokens.length > 0) ? tokens[0] : "help";
             var params = Arrays.copyOfRange(tokens, 1, tokens.length);
             return switch (cmd) {
-                case "signin" -> signIn(params);
-                case "signout" -> signOut();
+                case "login" -> signIn(params);
+                case "logout" -> signOut();
+                case "list" -> listGames();
+                case "create" -> createGame(params);
                 case "register" -> register(params);
                 case "quit" -> "quit";
                 default -> help();
@@ -36,29 +43,54 @@ public class ChessClient {
     }
 
     public String signIn(String... params) throws ResponseException {
-        if (params.length >= 2) {
+        if (params.length == 2) {
             var username = params[0];
             var password = params[1];
+            visitorName = username;
+            authToken =  server.login(username, password);
             state = State.SIGNEDIN;
-            visitorName = String.join("-", params);
-            return String.format("You signed in as %s.", visitorName);
+            return String.format("You signed in as %s.", username);
         }
         throw new ResponseException(400, "Expected: <yourname>");
     }
     public String register(String... params) throws ResponseException {
-        if(params.length >= 3) {
-            var username = params[0];
-            var password = params[1];
-            var email = params[2];
-            Assertions.assertEquals(HttpURLConnection.HTTP_OK, server.register(new User(username, password, email)),
-                    "Server response code was not 200 OK");
-            return String.format("Epic, you signed in as %s.", username);
+        if(params.length == 3) {
+                var myName = String.join("-", params);
+                var username = params[0];
+                var password = params[1];
+                var email = params[2];
+                visitorName = username;
+                var user1 = new User(username, password, email);
+                authToken = server.register(user1);
+                state = State.SIGNEDIN;
+                return String.format("Epic, you signed in as %s.", username);
+
         }
-        throw new ResponseException (400, "Incorrect credentials??");
+        throw new ResponseException (400, "Incorrect credentials");
     }
 
+    public String listGames(String ... params) throws ResponseException {
+        Game[] games =  server.listGames(authToken);
+       String returnString = "";
+        for (Game game : games) {
+            returnString += ("(GameName: " + game.gameName() + ",  whiteUsername: " + game.whiteUsername() + ",  blackUsername: " + game.blackUsername() + ",  gameID: " + game.gameID() + ")");
+            returnString += "\n";
+        }
+       return returnString;
+    }
+    public String createGame(String ... params) throws ResponseException {
+        assertSignedIn();
+        if(params.length >= 1){
+            var gameName = String.join("-", params);
+            var gameID = server.createGame(authToken, gameName);
+            return ("Awesome, you created a game. GameID = " + gameID);
+        }
+        throw new ResponseException(400, "You need to provide a name for the game");
+    }
     public String signOut() throws ResponseException {
         assertSignedIn();
+        String logOutName = visitorName;
+        server.logout(authToken);
         state = State.SIGNEDOUT;
         return String.format("%s left the game", visitorName);
     }
@@ -72,13 +104,19 @@ public class ChessClient {
     public String help() {
         if (state == State.SIGNEDOUT) {
             return """
-                    -register <username, password, email> I hope this works
-                    - signIn <yourname>
+                    - login <yourname>
+                    -register <username, password, email>
                     - quit
                     """;
         }
         return """
-                - list
-                Ok, I'm going to set these to the things you'd actually do in the chess game""";
+                - Create <NAME> - a game
+                - list - games
+                - join<ID> [WHITE|BLACK|<empty>] - a game
+                - observe <ID> a game
+                - logout - when you are done
+                - quit - playing chess
+                - help - with possible commands
+                """;
     }
 }

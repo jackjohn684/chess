@@ -4,7 +4,6 @@ import chess.ChessGame;
 import model.AuthToken;
 import model.Game;
 import model.User;
-import model.gameID;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -38,7 +37,7 @@ public class MemoryDataAccess implements DataAccess {
         return auth;
     }
 
-    public gameID createGame(String auth, String gameName) throws DataAccessException, SQLException {
+    public int createGame(String auth, String gameName) throws DataAccessException, SQLException {
         Random rnd = new Random();
         int randomNumber = 1000 + rnd.nextInt(9000);
         Connection conn = DatabaseManager.getConnection();
@@ -47,9 +46,8 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setInt(2,randomNumber);
             preparedStatement.executeUpdate();
         }
-        var myGameId = new gameID(randomNumber);
         conn.close();
-        return myGameId;
+        return randomNumber;
     }
     public String makeGame(Game game) throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
@@ -80,7 +78,7 @@ public class MemoryDataAccess implements DataAccess {
         conn.close();
         return users;
     }
-    public Collection<Game> listGames() throws DataAccessException, SQLException {
+    public Game[] listGames() throws DataAccessException, SQLException {
         ArrayList<Game> games = new ArrayList<Game>();
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game")){
@@ -96,7 +94,12 @@ public class MemoryDataAccess implements DataAccess {
             }
         }
         conn.close();
-        return games;
+        if(games.isEmpty()) {
+            return null;
+        }
+        Game [] array = new Game[games.size()];
+        array = games.toArray(array);
+        return  array;
     }
 
     public void deleteUser(String username) throws DataAccessException, SQLException {

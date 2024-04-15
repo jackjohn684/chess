@@ -37,9 +37,9 @@ public class Server {
         Spark.delete("/db", this::clear);
         Spark.post("/session", this::login);
         Spark.delete("/session", this::logout);
+        Spark.get("/game", this::listGames);
         Spark.post("/game", this::createGame);
         Spark.put("/game", this::joinGame);
-        Spark.get("/game", this::listGames);
         Spark.awaitInitialization();
         return Spark.port();
     }
@@ -60,7 +60,20 @@ public class Server {
             return new Gson().toJson(new ErrorMessage("Error: already taken"));
         }
     }
+    private Object listGames(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
+        var auth = req.headers("authorization");
+        var user = userService.getAuthToken(auth);
+        if (user == null){
+            res.status(401);
+            return new Gson().toJson(new ErrorMessage("Error: 401"));
+        }
+        res.type("application/json");
+        var list = gameService.listGames();
+        if(list == null){
 
+        }
+        return new Gson().toJson(list);
+    }
     private Object createGame(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
         var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
@@ -125,17 +138,7 @@ public class Server {
         var list = userService.listUsers().toArray();
         return new Gson().toJson(Map.of("user", list));
     }
-    private Object listGames(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
-        var auth = req.headers("authorization");
-        var user = userService.getAuthToken(auth);
-        if (user == null){
-            res.status(401);
-            return new Gson().toJson(new ErrorMessage("Error: 401"));
-        }
-        res.type("application/json");
-        var list = gameService.listGames().toArray();
-        return new Gson().toJson(Map.of("games", list));
-    }
+
     private Object logout(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
          var user = userService.getAuthToken(auth);

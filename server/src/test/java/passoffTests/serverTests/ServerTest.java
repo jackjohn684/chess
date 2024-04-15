@@ -1,5 +1,7 @@
 package passoffTests.serverTests;
 
+import exception.ResponseException;
+import model.AuthToken;
 import model.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,6 +25,10 @@ public class ServerTest {
 
     private static ServerFacade serverFacade;
     private String existingAuth;
+
+    public ServerTest() throws ResponseException {
+    }
+
     @BeforeAll
     public static void init() {
         server = new Server();
@@ -46,5 +52,15 @@ public class ServerTest {
         assertEquals(expected.username(), actual.username());
         assertEquals(expected.password(), actual.password());
         assertEquals(expected.email(), actual.email());
+    }
+
+    @Test
+    void listGames() throws ResponseException {
+        User user = new User("username", "password", "email");
+        AuthToken auth = serverFacade.register(user);
+        serverFacade.createGame(auth,"newGame");
+        serverFacade.createGame(auth,"newGame1");
+        serverFacade.createGame(auth,"newGame2");
+        var result = assertDoesNotThrow(() -> serverFacade.listGames(auth));
     }
 }
