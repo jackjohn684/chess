@@ -3,6 +3,7 @@ package ui;
 import exception.ResponseException;
 import model.AuthToken;
 import model.Game;
+import model.GameInfo;
 import model.User;
 import server.Server;
 import server.ServerFacade;
@@ -15,6 +16,7 @@ public class ChessClient {
     private final String serverUrl;
     private final Server chessServer;
     private State state = State.SIGNEDOUT;
+    private String boardString;
     private AuthToken authToken;
     public ChessClient(String serverUrl) {
         chessServer = new Server();
@@ -34,6 +36,8 @@ public class ChessClient {
                 case "list" -> listGames();
                 case "create" -> createGame(params);
                 case "register" -> register(params);
+                case "observe" -> observe(params);
+                case "join" -> join(params);
                 case "quit" -> "quit";
                 default -> help();
             };
@@ -52,6 +56,35 @@ public class ChessClient {
             return String.format("You signed in as %s.", username);
         }
         throw new ResponseException(400, "Expected: <yourname>");
+    }
+
+    public String observe(String... params) throws ResponseException {
+        if (params.length == 1) {
+            var gameID = (params[0]);
+            var gameinfo = new GameInfo( gameID, null, null);
+            server.joinGame(authToken,  gameinfo);
+           // ChessBoard.doBoard();
+            return "";
+        }
+        return "Incorrect number of parameters";
+    }
+    public String join(String... params) throws ResponseException {
+        if(params.length == 2) {
+            String whiteUsername = null;
+            String blackUsername = null;
+            var gameID = (params[0]);
+            String whiteOrBlack = (params[1]);
+
+            if (!whiteOrBlack.equals("white") && !whiteOrBlack.equals("black"))
+            {
+                throw new ResponseException(400, "You have to say white or black");
+            }
+            var gameinfo = new GameInfo(gameID, whiteOrBlack, null);
+            server.joinGame(authToken, gameinfo);
+            //ChessBoard.doBoard();
+            return "";
+        }
+        return "yee";
     }
     public String register(String... params) throws ResponseException {
         if(params.length == 3) {

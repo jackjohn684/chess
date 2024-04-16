@@ -3,6 +3,7 @@ package dataAccess;
 import chess.ChessGame;
 import model.AuthToken;
 import model.Game;
+import model.GameInfo;
 import model.User;
 
 import java.sql.Connection;
@@ -43,7 +44,7 @@ public class MemoryDataAccess implements DataAccess {
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("INSERT INTO game (gameName, gameID) VALUES(?,?)")){
             preparedStatement.setString(1, gameName);
-            preparedStatement.setInt(2,randomNumber);
+            preparedStatement.setString(2, String.valueOf(randomNumber));
             preparedStatement.executeUpdate();
         }
         conn.close();
@@ -55,7 +56,7 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.setString(1, game.gameName());
             preparedStatement.setString(2, game.whiteUsername());
             preparedStatement.setString(3, game.blackUsername());
-            preparedStatement.setInt(4, game.gameID());
+            preparedStatement.setString(4, game.gameID());
             preparedStatement.executeUpdate();
         }
         conn.close();
@@ -84,7 +85,7 @@ public class MemoryDataAccess implements DataAccess {
         try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game")){
             try(var rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
-                    var gameID = rs.getInt("gameID");
+                    var gameID = rs.getString("gameID");
                     var whiteUsername = rs.getString("whiteUsername");
                     var blackUsername = rs.getString("blackUsername");
                     var gameName = rs.getString("gameName");
@@ -119,10 +120,10 @@ public class MemoryDataAccess implements DataAccess {
         conn.close();
     }
 
-    public void deleteGame(int gameID) throws DataAccessException, SQLException {
+    public void deleteGame(String gameID) throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
         try (var preparedStatement = conn.prepareStatement("DELETE from game where gameID = ?")){
-            preparedStatement.setInt(1, gameID);
+            preparedStatement.setString(1, gameID);
             preparedStatement.executeUpdate();
         }
         conn.close();
@@ -182,17 +183,16 @@ public class MemoryDataAccess implements DataAccess {
         clearUsers();
         clearGames();
     }
-    public Game getGame(int gameID) throws DataAccessException, SQLException {
+    public Game getGame(String gameID) throws DataAccessException, SQLException {
         Game game = null;
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game WHERE gameID = ?")){
-            preparedStatement.setInt(1, gameID);
+            preparedStatement.setString(1, gameID);
             try(var rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                     var whiteUsername = rs.getString("whiteUsername");
                     var blackUsername = rs.getString("blackUsername");
                     var gameName = rs.getString("gameName");
-
                    game = new Game(gameID, whiteUsername, blackUsername, gameName, new ChessGame());
                 }
             }
@@ -202,22 +202,23 @@ public class MemoryDataAccess implements DataAccess {
     }
 
 
-    public String joinGame(int gameID, String playerColor, String username) throws SQLException, DataAccessException {
-        var oldGame = getGame(gameID);
-        if (oldGame == null || oldGame.gameID() != gameID){
+    public String joinGame(GameInfo gameInfo, String username) throws SQLException, DataAccessException {
+        var oldGame = getGame(gameInfo.gameID());
+        String playerColor = gameInfo.playerColor();
+        if (oldGame == null || oldGame.gameID() != gameInfo.gameID()){
             return  "400";
         }
         Game newGame = null;
-        if (playerColor == null) {
+        if (gameInfo.playerColor() == null) {
             return "";
-        } else if (playerColor.equals("WHITE")) {
+        } else if (playerColor.equals("white")) {
             if (oldGame.whiteUsername() == null) {
                 newGame = new Game(oldGame.gameID(), username, oldGame.blackUsername(), oldGame.gameName(), oldGame.game());
             }
             else {
                 return "403";
             }
-        } else if (playerColor.equals("BLACK")) {
+        } else if (playerColor.equals("black")) {
             if (oldGame.blackUsername() == null) {
                 newGame = new Game(oldGame.gameID(), oldGame.whiteUsername(), username, oldGame.gameName(), oldGame.game());
             }
@@ -225,7 +226,10 @@ public class MemoryDataAccess implements DataAccess {
                 return "403";
             }
         }
-        deleteGame(gameID);
+        else {
+            return "403";
+        }
+        deleteGame(gameInfo.gameID());
         assert newGame != null;
         makeGame(newGame);
         return "";

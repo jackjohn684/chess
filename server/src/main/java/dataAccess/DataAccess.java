@@ -2,6 +2,7 @@ package dataAccess;
 
 import model.AuthToken;
 import model.Game;
+import model.GameInfo;
 import model.User;
 
 import java.sql.SQLException;
@@ -14,13 +15,13 @@ public interface DataAccess {
     public void deleteUser(String userName) throws DataAccessException, SQLException;
     public void deleteAuthToken(String auth) throws DataAccessException, SQLException;
     public void clearUsers() throws DataAccessException, SQLException;
-    public void deleteGame(int gameID) throws DataAccessException, SQLException;
+    public void deleteGame(String gameID) throws DataAccessException, SQLException;
     public AuthToken addAuthToken(String username) throws SQLException, DataAccessException;
     public int createGame(String auth, String gameName) throws DataAccessException, SQLException;
     public String makeGame(Game game) throws DataAccessException, SQLException;
     public AuthToken getAuthToken(String auth) throws DataAccessException, SQLException;
-    public String joinGame(int gameID, String playerColor, String username) throws SQLException, DataAccessException;
-    public Game getGame(int gameID) throws DataAccessException, SQLException;
+    public String joinGame(GameInfo gameInfo, String username) throws SQLException, DataAccessException;
+    public Game getGame(String gameID) throws DataAccessException, SQLException;
     public void clearGames() throws DataAccessException, SQLException;
     public Game[] listGames() throws DataAccessException, SQLException;
 

@@ -95,7 +95,7 @@ public class Server {
         var gameInfo = new Gson().fromJson(req.body(), GameInfo.class);
         var user = userService.getAuthToken(auth);
         if(user != null){
-            statusCode = gameService.joinGame(gameInfo.gameID(), gameInfo.playerColor(), user.getUsername());
+            statusCode = gameService.joinGame(gameInfo, user.getUsername());
             if (statusCode.equals("403"))
             {
                 res.status(403);

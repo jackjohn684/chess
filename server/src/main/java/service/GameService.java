@@ -4,6 +4,7 @@ import dataAccess.DataAccess;
 import dataAccess.DataAccessException;
 import exception.ResponseException;
 import model.Game;
+import model.GameInfo;
 
 import java.sql.SQLException;
 
@@ -17,10 +18,10 @@ public class GameService {
     public void clearGames() throws SQLException, DataAccessException {
         dataAccess.clearGames();
     }
-    public String joinGame(int gameID, String playerColor, String username) throws SQLException, DataAccessException {
-        return dataAccess.joinGame(gameID, playerColor, username);
+    public String joinGame(GameInfo gameInfo, String username) throws SQLException, DataAccessException {
+        return dataAccess.joinGame(gameInfo, username);
     }
-    public Game getGame(int gameID) throws SQLException, DataAccessException {
+    public Game getGame(String gameID) throws SQLException, DataAccessException {
         return dataAccess.getGame(gameID);
     }
     public Game[] listGames() throws ResponseException, SQLException, DataAccessException {

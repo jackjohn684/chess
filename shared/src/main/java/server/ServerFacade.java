@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import exception.ResponseException;
 import model.AuthToken;
 import model.Game;
+import model.GameInfo;
 import model.User;
 
 import java.io.IOException;
@@ -41,13 +42,13 @@ public class ServerFacade {
         return this.makeRequest("GET", path, null, auth.getAuth(), Game[].class);
     }
     public Integer createGame(AuthToken auth, String gameInfo) throws ResponseException {
-        Game game = new Game(0, null, null, gameInfo, null);
+        Game game = new Game("0", null, null, gameInfo, null);
         var path = "/game";
         return this.makeRequest("POST", path, game, auth.getAuth(), Integer.class);
     }
-    public Object joinGame(AuthToken auth) throws ResponseException {
+    public Object joinGame(AuthToken auth, GameInfo gameInfo) throws ResponseException {
         var path = "/game";
-        return this.makeRequest("POST", path, auth, null, Game.class);
+        return this.makeRequest("PUT", path, gameInfo, auth.getAuth(), GameInfo.class);
     }
     private <T> T makeRequest(String method, String path, Object request, Object headerRequest, Class<T> responseClass) throws ResponseException{
         try {
