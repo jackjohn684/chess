@@ -109,7 +109,7 @@
     "JUnit.StandardAPITests.badGameIDJoin.executor": "Run",
     "JUnit.StandardAPITests.badGameIDWatch.executor": "Run",
     "JUnit.StandardAPITests.clearData.executor": "Run",
-    "JUnit.StandardAPITests.executor": "Debug",
+    "JUnit.StandardAPITests.executor": "Run",
     "JUnit.StandardAPITests.failLogout.executor": "Run",
     "JUnit.StandardAPITests.failRegister.executor": "Debug",
     "JUnit.StandardAPITests.gamesList.executor": "Run",
