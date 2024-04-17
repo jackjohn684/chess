@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="" />
+    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +113,7 @@
     "JUnit.StandardAPITests.badGameIDJoin.executor": "Run",
     "JUnit.StandardAPITests.badGameIDWatch.executor": "Run",
     "JUnit.StandardAPITests.clearData.executor": "Run",
-    "JUnit.StandardAPITests.executor": "Run",
+    "JUnit.StandardAPITests.executor": "Debug",
     "JUnit.StandardAPITests.failLogout.executor": "Run",
     "JUnit.StandardAPITests.failRegister.executor": "Debug",
     "JUnit.StandardAPITests.gamesList.executor": "Run",

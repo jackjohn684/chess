@@ -14,6 +14,7 @@ import java.net.URL;
 
 public class ServerFacade {
     private final String serverUrl;
+
     public ServerFacade(String url) { serverUrl = url;}
 
     public void clear() throws ResponseException {

@@ -5,7 +5,6 @@ import exception.ResponseException;
 import model.AuthToken;
 import model.GameInfo;
 import model.User;
-import server.Server;
 import server.ServerFacade;
 
 import java.util.Arrays;
@@ -14,13 +13,10 @@ public class ChessClient {
     private String visitorName = null;
     private final ServerFacade server;
     private final String serverUrl;
-    private final Server chessServer;
     private State state = State.SIGNEDOUT;
     private String boardString;
     private AuthToken authToken;
     public ChessClient(String serverUrl) {
-        chessServer = new Server();
-        chessServer.run(8080);
         server = new ServerFacade(serverUrl);
         this.serverUrl = serverUrl;
     }
