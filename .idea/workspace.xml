@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/client/client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/DataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/server/ServerFacade.java" afterDir="false" />
-    </list>
+    <list default="true" id="293ed45a-fb7a-49af-9905-dc9906902d4e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -296,11 +287,6 @@
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="223" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/ServerTest.java</url>
           <line>48</line>
           <properties>
@@ -320,11 +306,6 @@
           <url>file://$PROJECT_DIR$/client/src/main/java/ui/websocket/WebSocketFacade.java</url>
           <line>21</line>
           <option name="timeStamp" value="339" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/StandardAPITests.java</url>
-          <line>611</line>
-          <option name="timeStamp" value="368" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
