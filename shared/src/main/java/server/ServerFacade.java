@@ -2,10 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import exception.ResponseException;
-import model.AuthToken;
-import model.Game;
-import model.GameInfo;
-import model.User;
+import model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +20,6 @@ public class ServerFacade {
         var path = "/db";
         var response = this.makeRequest("DELETE", path, null, null, null);
     }
-
     public AuthToken register(User user) throws ResponseException {
         var path = "/user";
         return this.makeRequest("POST", path, user,null, AuthToken.class);
@@ -39,12 +35,15 @@ public class ServerFacade {
     }
     public Game[] listGames(AuthToken auth) throws ResponseException {
         var path = "/game";
-        return this.makeRequest("GET", path, null, auth.getAuth(), Game[].class);
+        record listGameResponse(Game[] game){
+        }
+        var response = this.makeRequest("GET", path, null, auth.getAuth(), listGameResponse.class).game();
+        return response;
     }
-    public Integer createGame(AuthToken auth, String gameInfo) throws ResponseException {
+    public gameID createGame(AuthToken auth, String gameInfo) throws ResponseException {
         Game game = new Game("0", null, null, gameInfo, null);
         var path = "/game";
-        return this.makeRequest("POST", path, game, auth.getAuth(), Integer.class);
+        return this.makeRequest("POST", path, game, auth.getAuth(), gameID.class);
     }
     public Object joinGame(AuthToken auth, GameInfo gameInfo) throws ResponseException {
         var path = "/game";

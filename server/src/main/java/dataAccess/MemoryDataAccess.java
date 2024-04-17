@@ -1,10 +1,7 @@
 package dataAccess;
 
 import chess.ChessGame;
-import model.AuthToken;
-import model.Game;
-import model.GameInfo;
-import model.User;
+import model.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -38,7 +35,7 @@ public class MemoryDataAccess implements DataAccess {
         return auth;
     }
 
-    public int createGame(String auth, String gameName) throws DataAccessException, SQLException {
+    public gameID createGame(String auth, String gameName) throws DataAccessException, SQLException {
         Random rnd = new Random();
         int randomNumber = 1000 + rnd.nextInt(9000);
         Connection conn = DatabaseManager.getConnection();
@@ -48,7 +45,8 @@ public class MemoryDataAccess implements DataAccess {
             preparedStatement.executeUpdate();
         }
         conn.close();
-        return randomNumber;
+        var myGameId = new gameID( randomNumber);
+        return myGameId;
     }
     public String makeGame(Game game) throws DataAccessException, SQLException {
         Connection conn = DatabaseManager.getConnection();
@@ -79,8 +77,8 @@ public class MemoryDataAccess implements DataAccess {
         conn.close();
         return users;
     }
-    public Game[] listGames() throws DataAccessException, SQLException {
-        ArrayList<Game> games = new ArrayList<Game>();
+    public Collection<Game> listGames() throws DataAccessException, SQLException {
+        var games = new ArrayList<Game>();
         Connection conn = DatabaseManager.getConnection();
         try(var preparedStatement = conn.prepareStatement("SELECT gameID, whiteUsername, blackUsername, gameName from game")){
             try(var rs = preparedStatement.executeQuery()) {
@@ -98,9 +96,7 @@ public class MemoryDataAccess implements DataAccess {
         if(games.isEmpty()) {
             return null;
         }
-        Game [] array = new Game[games.size()];
-        array = games.toArray(array);
-        return  array;
+        return  games;
     }
 
     public void deleteUser(String username) throws DataAccessException, SQLException {
@@ -211,14 +207,14 @@ public class MemoryDataAccess implements DataAccess {
         Game newGame = null;
         if (gameInfo.playerColor() == null) {
             return "";
-        } else if (playerColor.equals("white")) {
+        } else if (playerColor.equals(("white").toUpperCase())) {
             if (oldGame.whiteUsername() == null) {
                 newGame = new Game(oldGame.gameID(), username, oldGame.blackUsername(), oldGame.gameName(), oldGame.game());
             }
             else {
                 return "403";
             }
-        } else if (playerColor.equals("black")) {
+        } else if (playerColor.equals(("black").toUpperCase())) {
             if (oldGame.blackUsername() == null) {
                 newGame = new Game(oldGame.gameID(), oldGame.whiteUsername(), username, oldGame.gameName(), oldGame.game());
             }

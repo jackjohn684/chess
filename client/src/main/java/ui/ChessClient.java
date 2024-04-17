@@ -1,8 +1,8 @@
 package ui;
 
+import com.google.gson.Gson;
 import exception.ResponseException;
 import model.AuthToken;
-import model.Game;
 import model.GameInfo;
 import model.User;
 import server.Server;
@@ -103,13 +103,13 @@ public class ChessClient {
     }
 
     public String listGames(String ... params) throws ResponseException {
-        Game[] games =  server.listGames(authToken);
-       String returnString = "";
-        for (Game game : games) {
-            returnString += ("(GameName: " + game.gameName() + ",  whiteUsername: " + game.whiteUsername() + ",  blackUsername: " + game.blackUsername() + ",  gameID: " + game.gameID() + ")");
-            returnString += "\n";
-        }
-       return returnString;
+       var gameList = server.listGames(authToken);
+       var result = new StringBuilder();
+       var gson = new Gson();
+      for (var game: gameList) {
+          result.append(gson.toJson(game)).append('\n');
+       }
+       return result.toString();
     }
     public String createGame(String ... params) throws ResponseException {
         assertSignedIn();

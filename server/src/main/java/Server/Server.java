@@ -5,8 +5,10 @@ import dataAccess.DataAccessException;
 import dataAccess.MemoryDataAccess;
 import exception.ResponseException;
 import model.ErrorMessage;
+import model.Game;
 import model.GameInfo;
 import model.User;
+import server.websocket.WebSocketHandler;
 import service.ClearService;
 import service.GameService;
 import service.UserService;
@@ -20,16 +22,20 @@ public class Server {
     private final UserService userService;
     private final ClearService clearService;
     private final GameService gameService;
+
+    private final WebSocketHandler webSocketHandler;
     public Server()
     {
         userService = new UserService(new MemoryDataAccess());
         clearService = new ClearService (new MemoryDataAccess());
         gameService = new GameService (new MemoryDataAccess());
+        webSocketHandler = new WebSocketHandler();
     }
     public int port() { return Spark.port();}
     public int run(int desiredPort) {
         Spark.port(desiredPort);
         Spark.staticFiles.location("web");
+        Spark.webSocket("/connect", webSocketHandler);
         Spark.get("/user", this::listUsers);
         Spark.post("/user", this::register);
         Spark.delete("/user/:username", this::deleteUser);
@@ -68,11 +74,15 @@ public class Server {
             return new Gson().toJson(new ErrorMessage("Error: 401"));
         }
         res.type("application/json");
-        var list = gameService.listGames();
-        if(list == null){
 
+        if(gameService.listGames() != null) {
+            var list = gameService.listGames().toArray();
+            return new Gson().toJson(Map.of("games", list));
         }
-        return new Gson().toJson(list);
+        else {
+            Game[] list1 = new Game[0];
+            return new Gson().toJson(Map.of("games", list1));
+        }
     }
     private Object createGame(Request req, Response res) throws ResponseException, SQLException, DataAccessException {
         var auth = req.headers("authorization");
