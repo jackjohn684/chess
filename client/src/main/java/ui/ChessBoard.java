@@ -19,9 +19,21 @@ public class ChessBoard {
     private static Random rand = new Random();
     private static int rowsDrawn = 0;
     private static boolean footer;
-
-
     public static void main(String[] args) {
+        var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        initializePieces();
+        out.print(ERASE_SCREEN);
+
+        drawHeaders(out);
+
+        drawTicTacToeBoard(out);
+        footer = false;
+        drawHeaders(out);
+        out.print(SET_BG_COLOR_BLACK);
+        out.print(SET_TEXT_COLOR_WHITE);
+    }
+
+    public static void makeBoard() {
         var out = new PrintStream(System.out, true, StandardCharsets.UTF_8);
         initializePieces();
         out.print(ERASE_SCREEN);
@@ -62,6 +74,10 @@ public class ChessBoard {
         squares[7][5] = SET_TEXT_COLOR_RED + " B ";
         squares[7][6] = SET_TEXT_COLOR_RED + " N ";
         squares[7][7] = SET_TEXT_COLOR_RED + " R ";
+    }
+
+    private static void updatePiece(int coord1, int coord2){
+
     }
 
     private static void drawHeaders(PrintStream out) {
@@ -123,10 +139,6 @@ public class ChessBoard {
         drawHeader(out,header);
         out.print(" ");
         for (int boardCol = 0; boardCol < BOARD_SIZE_IN_SQUARES; ++boardCol) {
-            int prefixLength = SQUARE_SIZE_IN_CHARS / 2;
-            int suffixLength = SQUARE_SIZE_IN_CHARS - prefixLength - 1;
-
-            out.print(EMPTY.repeat(prefixLength));
             if ((boardCol + rowsDrawn) % 2 == 0) {
                 whiteSquare(out, squares[rowsDrawn][boardCol]);
             } else {
@@ -134,7 +146,6 @@ public class ChessBoard {
             }
             out.print(SET_TEXT_COLOR_GREEN);
             // printPlayer(out, rand.nextBoolean() ? X : O);
-            out.print(EMPTY.repeat(suffixLength));
         }
         setBlack(out);
         out.print(" ");
